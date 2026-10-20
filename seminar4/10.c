@@ -20,6 +20,6 @@ int main(void)
 
     char* animals[5] = {&a[0], &b[0], &c[0], &d[0], &e[0]};
     char* x = strmax(animals, 5);
-    printf("%s\n", x);   // Wolf
+    printf("%s\n", x);   
     return 0;
 }
