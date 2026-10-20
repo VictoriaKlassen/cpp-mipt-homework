@@ -1,26 +1,40 @@
 #include <stdio.h>
-#include <ctype.h>
 #include <string.h>
-void used_chars(const char* str, char* used) {
-    int present[26] = {0};
-    while (*str != '\0') {
-        unsigned char c = (unsigned char)*str;
-        if (isalpha(c)) {
-            c = (unsigned char)tolower(c);
-            if (c >= 'a' && c <= 'z') present[c - 'a'] = 1;
-        }
-        ++str;
+
+void used_chars(const char* str, char* used)
+{
+    int seen[26] = {0};
+
+    for (const char* p = str; *p; p++)
+    {
+        char c = *p;
+        if (c >= 'A' && c <= 'Z')
+            c = c - 'A' + 'a';
+        if (c >= 'a' && c <= 'z')
+            seen[c - 'a'] = 1;
     }
-    int j = 0;
-    for (int i = 0; i < 26; ++i)
-        if (present[i]) used[j++] = (char)('a' + i);
-    used[j] = '\0';
+
+    char* q = used;
+    for (int i = 0; i < 26; i++)
+        if (seen[i])
+            *q++ = 'a' + i;
+    *q = '\0';
 }
-int main(void) {
-    char s[100] = "Sapere Aude", u[30];
-    used_chars(s, u); printf("%s\n", u);
-    strcpy(s, "123!$@"); used_chars(s, u); printf("%s\n", u);
+
+int main(void)
+{
+    char s[50] = "Sapere Aude";
+    char u[30];
+    used_chars(s, u);
+    printf("%s\n", u);   // adeprsu
+
+    strcpy(s, "123!$@");
+    used_chars(s, u);
+    printf("%s\n", u);   // пустая строка
+
     strcpy(s, "The Quick Brown Fox Jumps Over The Lazy Dog!");
-    used_chars(s, u); printf("%s\n", u);
+    used_chars(s, u);
+    printf("%s\n", u);   // abcdefghijklmnopqrstuvwxyz
+
     return 0;
 }
