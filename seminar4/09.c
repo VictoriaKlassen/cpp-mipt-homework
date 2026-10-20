@@ -26,15 +26,15 @@ int main(void)
     char s[50] = "Sapere Aude";
     char u[30];
     used_chars(s, u);
-    printf("%s\n", u);   // adeprsu
+    printf("%s\n", u);   
 
     strcpy(s, "123!$@");
     used_chars(s, u);
-    printf("%s\n", u);   // пустая строка
+    printf("%s\n", u);   
 
     strcpy(s, "The Quick Brown Fox Jumps Over The Lazy Dog!");
     used_chars(s, u);
-    printf("%s\n", u);   // abcdefghijklmnopqrstuvwxyz
+    printf("%s\n", u);   
 
     return 0;
 }
