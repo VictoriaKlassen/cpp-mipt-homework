@@ -1,0 +1,12 @@
+CC = gcc
+CFLAGS = -std=c11 -Wall -Wextra -Werror -pedantic
+
+all: demo
+
+demo: main.c cube.c cube.h
+	$(CC) $(CFLAGS) main.c cube.c -o demo
+
+clean:
+	rm -f demo
+
+.PHONY: all clean
